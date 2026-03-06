@@ -1,24 +1,56 @@
-import { name } from 'ejs';
-import express from 'express'
+import express from "express";
 const app = express();
-app.set('view engine',"ejs")
-app.set("views","views")
-app.listen(8080,()=>{console.log("server is running on the port 8080")})
+app.set("view engine", "ejs");
+app.set("views", "views");
+app.listen(5000, () => console.log("Server Started"));
 
+app.use(express.urlencoded({ extended: true }));
 
-const users =[
-    {name:"ganesh",email:"ganesh123@gmail.com",password:"232434"},
-    {name:"suresh",email:"suresh343@gmail.com",password:"736203"},
-    {name:"sai reddy",email:"saireddy565@gmail.com",password:"847362"}
-]
+const users = [
+  { name: "Gaensh", email: "ganesh123@gmail.com", password: "1234" },
+  { name: "Ajay", email: "ajay@gmail.com", password: "1234" },
+  { name: "Komal", email: "komal@gmail.com", password: "1234" },
+];
 
-app.get('/login',(req,res)=>{
-    res.render("login")
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  const user = users.find((user) => user.email === email);
+  if (user) {
+    if (user.password === password) {
+      res.redirect("/");
+    } else {
+      res.redirect("/login");
+    }
+  } else {
+    res.redirect("/login");
+  }
+  res.redirect("/");
+});
+
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+app.post('/register', (req, res) => {
+  const { email,password,name } = req.body;
+  const user= users.find((user) => user.email === email);
+  if(user){
+    res.redirect("/login");
+    
+    return
+  }
+  else{
+    users.push({
+      name: name,password:password,email:email});
+    res.redirect("/login");
+
+  }
+
 })
-app.get('/register',(req,res)=>{
-    res.render("Register")
-})
-
-app.get('/',(req,res)=>{
-    res.render("Dashboard")
-})
+app.get("/", (req, res) => {
+  res.render("dashboard", { users });
+});

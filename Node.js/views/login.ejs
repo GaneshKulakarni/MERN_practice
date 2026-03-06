@@ -7,9 +7,10 @@
 </head>
 <body>
     <h1>Hey malla reddy</h1>
-    <form action="/login">
-        <p><input type="text" placeholder="name"></p>
-        <p><input type="password" placeholder="password"></p>
+    <form action="/login" method="post">
+        <p><input type="text" name="email" placeholder="name"></p>
+        <p><input type="password" name="password" placeholder="password"></p>
+        <button>Login</button>
     </form>
     <h5> Have no account then <a href="/register">Register</a></h5>
 </body>
