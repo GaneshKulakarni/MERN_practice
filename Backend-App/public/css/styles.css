@@ -1,0 +1,22 @@
+.row {
+    display: flex;
+    /* justify-content: space-around; */
+    flex-wrap: wrap;
+}
+.box{
+    margin: 5px;
+    padding: 5px;
+    border:1px solid gray;
+    border-radius: 5px;
+    
+}
+.header{
+    display: flex;
+    justify-content: center;
+    background: orange;
+}
+.footer{
+    background: rgb(76, 207, 236);
+    display: flex;
+    justify-content: center;
+}
