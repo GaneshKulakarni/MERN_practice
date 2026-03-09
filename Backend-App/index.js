@@ -28,11 +28,11 @@ app.use("/", storeRouter);
 // app.use("/products", productRouter);
 // app.use("/users", userRouter);
 
-const startServer = async()=>{
+const startServer = async () => {
   await dbConnect();
-  app.listen(5005, () => {
-    console.log("Server Started");
+  const PORT = process.env.PORT || 5005;
+  app.listen(PORT, () => {
+    console.log(`Server Started on port ${PORT}`);
   });
-
 };
-startServer()
+startServer();
